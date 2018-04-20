@@ -65,11 +65,11 @@
                                         ])
         
                                         
-        var my_interface = my_contract.at('0xa63dcd8c1b88393e402b0573ac3f4207de98ccc0')
+        var my_interface = my_contract.at('0xa63dcd8c1b88393e402b0573ac3f4207de98ccc0') //ADDRESS OF CONTRACT HERE!
         
         
         $("#button").click(function() {
-            my_interface.bet({from: '0xd55adFBDE1df6C10F1747E3d497a0c95F7C5867B', value: $('#bet').val()* 1000000000000000000, gas: 300000});
+            my_interface.bet({from: '0xd55adFBDE1df6C10F1747E3d497a0c95F7C5867B', value: $('#bet').val()* 1000000000000000000, gas: 300000}); //ADDRESS OF PLAYER HERE!
         });
            
     </script>
