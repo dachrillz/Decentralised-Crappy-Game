@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <h1>Chrille's really sucky game :)</h1>
+
+        <label for="name" class="col-lg-2 control-label">Make Bet</label>
+        <input id="bet" type="text">
+
+        <button id="button">Place bet</button>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <script>
+       //Script code, should normally be outside of the index file...
+       
+       
+       //This is boiler plate code that sets up the web3 stuff (web3 is what we use to interface with the ethereum blockchain)
+       if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545")); //If this was a real application this should connect to THE ethereum blockchain instead of localhost
+        }
+        
+        //web3.eth.defaultAccount = web3.eth.accounts[0] // we simply use the first account that our testchain provides as default account
+        
+        
+        var my_contract = web3.eth.contract([
+	                                        {
+		                                        "constant": false,
+		                                        "inputs": [],
+		                                        "name": "bet",
+		                                        "outputs": [],
+		                                        "payable": true,
+		                                        "stateMutability": "payable",
+		                                        "type": "function"
+	                                        },
+	                                        {
+		                                        "inputs": [
+			                                        {
+				                                        "name": "_house",
+				                                        "type": "address"
+			                                        }
+		                                        ],
+		                                        "payable": false,
+		                                        "stateMutability": "nonpayable",
+		                                        "type": "constructor"
+	                                        }
+                                        ])
+        
+                                        
+        var my_interface = my_contract.at('0xa63dcd8c1b88393e402b0573ac3f4207de98ccc0')
+        
+        
+        $("#button").click(function() {
+            my_interface.bet({from: '0xd55adFBDE1df6C10F1747E3d497a0c95F7C5867B', value: $('#bet').val()* 1000000000000000000, gas: 300000});
+        });
+           
+    </script>
+
+</body>
+</html>
+
+<!--Remix code...
+
+pragma solidity ^0.4.0;
+
+contract Simplebet {
+
+    address house;
+    
+    constructor(address _house) public {
+        house = _house;
+    }
+    
+    function bet() public payable {
+        
+        uint randomvalue = block.timestamp % 2; //This creates a somewhat random value...
+        
+        if (randomvalue == 1){
+            house.transfer(msg.value);
+        }
+        else{
+            msg.sender.transfer(msg.value);
+        }
+    }
+
+
+
+}
+-->
+
