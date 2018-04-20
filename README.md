@@ -13,7 +13,8 @@ There is no way to win money from the house as is... This kind of ruins the poin
 
 
 There is no contract published to the real ethereum chain, meaning that you yourself has to publish it using something like a local ethereum chain. This can be done using
-ganache. Note: To the constructor of the contract you have to pass an address. This is the address of the 'house'. That is something akin to the bank.
+ganache. 
+- Note: To the constructor of the contract you have to pass an address. This is the address of the 'house'. That is something akin to the bank.
 
 
 When you have published the contract (simpleBet.sol), you have to manually go into index.html and change the following addresses:
@@ -26,4 +27,6 @@ If I had more time I would do the following:
 - use the Truffle framework, as it makes the structure of the project more consistent.
 - I would make a game that simply has more logic to it.
 - Make a frontend that is somewhat pretty. The current one is truly bare minimum...
+
+
 
